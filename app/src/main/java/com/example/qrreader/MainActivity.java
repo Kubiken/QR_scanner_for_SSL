@@ -118,9 +118,10 @@ public class MainActivity extends AppCompatActivity implements QRCodeReaderView.
         ArrayList<CertificateGrabber> calcs = new ArrayList<CertificateGrabber>();
         for(String link: links)
         {
-            if(!link.startsWith("http://"))
-            calcs.add(new CertificateGrabber());
-            calcs.get(calcs.size() - 1).execute(link);
+            if(!link.startsWith("http://")) {
+                calcs.add(new CertificateGrabber());
+                calcs.get(calcs.size() - 1).execute(link);
+            }
         }
 
         if(calcs.size()>0){

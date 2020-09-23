@@ -66,8 +66,9 @@ public class CertificateGrabber extends AsyncTask<String, Integer, CertRes> {
             return certificates;
         }
 
-        String regex = "Full\\s+Name:\\n.+\\n";
-        Pattern pattern = Pattern.compile(regex);
+        String regex1 = "Full\\s+Name:\\n.+\\n";
+        String regex2 = "Authority\\s+Information\\s+Access:\\s+\\n.+\\n+..+\\n";
+        Pattern pattern = Pattern.compile(regex1);
 
 
             for (Certificate cert : certs) {
@@ -76,7 +77,13 @@ public class CertificateGrabber extends AsyncTask<String, Integer, CertRes> {
                         ( (X509Certificate) cert).checkValidity();
 
                         Matcher matcher = pattern.matcher(cert.toString());
-                       matcher.find();
+                       if(!matcher.find())
+                       {
+                           pattern = Pattern.compile(regex2);
+                           matcher = pattern.matcher(cert.toString());
+                           matcher.find();
+
+                       }
                        certificates.setCert(cert.toString().substring(matcher.start(), matcher.end()));
                        certificates.setStatus(true);
 
@@ -89,6 +96,7 @@ public class CertificateGrabber extends AsyncTask<String, Integer, CertRes> {
                      catch (CertificateNotYetValidException e) {
                         e.printStackTrace();
                     }
+
                 } else {
                     Matcher matcher = pattern.matcher(cert.toString());
                     matcher.find();
