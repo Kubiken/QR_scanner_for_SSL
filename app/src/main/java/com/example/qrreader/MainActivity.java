@@ -45,11 +45,11 @@ public class MainActivity extends AppCompatActivity implements QRCodeReaderView.
         setContentView(R.layout.activity_main);
 
         validate = (Button) findViewById(R.id.button_validate);
+        qrCodeReaderView = (QRCodeReaderView) findViewById(R.id.qrdecoderview);
         int permissionStatus = ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA);
 
         if(permissionStatus== PackageManager.PERMISSION_GRANTED)
         {
-            qrCodeReaderView = (QRCodeReaderView) findViewById(R.id.qrdecoderview);
             qrCodeReaderView.setOnQRCodeReadListener(this);
 
             // Use this function to enable/disable decoding
@@ -68,6 +68,7 @@ public class MainActivity extends AppCompatActivity implements QRCodeReaderView.
             {
                 ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA},1);
             }
+
 
     }
 
@@ -146,6 +147,18 @@ public class MainActivity extends AppCompatActivity implements QRCodeReaderView.
                     toast.show();
                 }
         }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        qrCodeReaderView.startCamera();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        qrCodeReaderView.stopCamera();
+    }
 
 
     class MyTimerTask extends TimerTask {
