@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <com.dlazaro66.qrcodereaderview.QRCodeReaderView
+        android:id="@+id/qrdecoderview"
+        android:layout_width="310dp"
+        android:layout_height="310dp"
+        android:layout_marginTop="25dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/button_read"
+        style="@style/ButtonsText"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="25dp"
+        android:background="@drawable/buttons_selector"
+        android:onClick="onReadClick"
+        android:text="@string/read"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/qrdecoderview" />
+
+    <Button
+        android:id="@+id/button_validate"
+        style="@style/ButtonsText"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/buttons_selector"
+        android:enabled="false"
+        android:onClick="onValidateClick"
+        android:text="@string/validate"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button_read" />
+
+    <TextView
+        android:id="@+id/links_result"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="35dp"
+        android:layout_marginTop="25dp"
+        android:text="@string/results"
+        app:layout_constraintStart_toEndOf="@+id/button_read"
+        app:layout_constraintTop_toBottomOf="@+id/qrdecoderview" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/certificate_results"
+        android:layout_width="match_parent"
+        android:layout_height="90dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:background="@color/colorInactive"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
